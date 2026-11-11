@@ -1,1 +1,2 @@
-fotos/
+fotos/*
+!fotos/galeria.json
