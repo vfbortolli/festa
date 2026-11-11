@@ -339,6 +339,27 @@
             border-color: var(--gold);
         }
 
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 14px;
+        }
+
+        .gallery-photo {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 9px;
+            box-shadow: 0 16px 36px rgba(0, 0, 0, 0.28);
+            transition: transform 220ms ease, border-color 220ms ease;
+        }
+
+        .gallery-photo:hover {
+            transform: translateY(-4px);
+            border-color: var(--gold);
+        }
+
         .partner-name {
             margin-bottom: 8px;
             color: var(--gold-light);
@@ -385,6 +406,10 @@
             }
 
             .grid-drinks {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+
+            .gallery-grid {
                 grid-template-columns: repeat(3, minmax(0, 1fr));
             }
         }
@@ -444,6 +469,15 @@
             .grid-drinks img {
                 height: 220px;
             }
+
+            .gallery-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 10px;
+            }
+
+            .gallery-photo {
+                height: 190px;
+            }
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -470,6 +504,7 @@
                 <a href="#cardapio">Cardápio</a>
                 <a href="#bebidas">Bebidas</a>
                 <a href="#estrutura">Estrutura</a>
+                <a href="#fotos">Fotos da galera</a>
             </nav>
         </div>
         <div class="container hero-content" id="inicio">
@@ -569,6 +604,16 @@
             </div>
         </div>
     </section>
+
+    <section id="fotos">
+        <div class="container">
+            <h2>Fotos da Galera</h2>
+            <div class="section-divider"></div>
+            <p class="section-lead">Reviva os momentos especiais da nossa festa!</p>
+            <div class="gallery-grid" id="galeria-fotos" aria-label="Galeria de fotos da festa"></div>
+            <p class="gallery-status" id="status-galeria" role="status" hidden></p>
+        </div>
+    </section>
     </main>
 
     <footer>
@@ -578,5 +623,41 @@
         </div>
     </footer>
 
+    <script>
+        async function carregarGaleria() {
+            const galeria = document.querySelector('#galeria-fotos');
+            const status = document.querySelector('#status-galeria');
+
+            try {
+                const resposta = await fetch('fotos/galeria.json');
+                if (!resposta.ok) {
+                    throw new Error(`Não foi possível carregar a lista de fotos (${resposta.status}).`);
+                }
+
+                const fotos = await resposta.json();
+                if (!Array.isArray(fotos) || fotos.some(nome => typeof nome !== 'string')) {
+                    throw new Error('A lista de fotos está em um formato inválido.');
+                }
+
+                fotos.forEach((caminhoFoto, indice) => {
+                    const foto = document.createElement('img');
+                    foto.src = /^https?:\/\//i.test(caminhoFoto)
+                        ? caminhoFoto
+                        : `fotos/${encodeURIComponent(caminhoFoto)}`;
+                    foto.alt = `Momento da festa, foto ${indice + 1}`;
+                    foto.className = 'gallery-photo';
+                    foto.loading = 'lazy';
+                    foto.decoding = 'async';
+                    galeria.appendChild(foto);
+                });
+            } catch (erro) {
+                console.error('Erro ao carregar a galeria de fotos:', erro);
+                status.textContent = 'Não foi possível carregar as fotos. Gere a lista da galeria e tente novamente.';
+                status.hidden = false;
+            }
+        }
+
+        carregarGaleria();
+    </script>
 </body>
 </html>
