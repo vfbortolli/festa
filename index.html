@@ -461,6 +461,75 @@
             text-align: center;
         }
 
+        .finance-summary {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 14px;
+            margin-bottom: 28px;
+        }
+
+        .finance-card {
+            padding: 20px;
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            text-align: left;
+        }
+
+        .finance-card p {
+            color: var(--muted);
+            font-size: 0.85rem;
+        }
+
+        .finance-card strong {
+            color: var(--gold-light);
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+        }
+
+        .finance-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 350px), 1fr));
+            gap: 14px;
+            text-align: left;
+        }
+
+        .finance-details .menu-info {
+            margin-top: 0;
+        }
+
+        .menu-info .finance-list {
+            display: block;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .finance-list li {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .finance-list li strong {
+            white-space: nowrap;
+        }
+
+        .finance-list a {
+            display: block;
+            color: var(--gold-light);
+            font-size: 0.8rem;
+        }
+
+        .finance-note {
+            margin-top: 20px;
+            color: var(--muted);
+            font-size: 0.85rem;
+        }
+
         footer {
             padding: 32px 0;
             border-top: 1px solid var(--line);
@@ -590,6 +659,7 @@
                 <a href="#cardapio">Cardápio</a>
                 <a href="#bebidas">Bebidas</a>
                 <a href="#estrutura">Estrutura</a>
+                <a href="#contabilidade">Contabilidade</a>
                 <a href="#fotos">Fotos da galera</a>
             </nav>
         </div>
@@ -608,7 +678,7 @@
                 </div>
                 <div class="highlight-box">
                     <p>Total arrecadado</p>
-                    <strong>R$ 8.400,00</strong>
+                    <strong>R$ 8.190,00</strong>
                 </div>
             </div>
             <a class="btn-link" href="#atracoes">Explore a festa <span aria-hidden="true">↓</span></a>
@@ -691,6 +761,67 @@
         </div>
     </section>
 
+    <section id="contabilidade" class="section-alt">
+        <div class="container">
+            <h2>Contabilidade da Festa</h2>
+            <div class="section-divider"></div>
+            <p class="section-lead">Acompanhe a arrecadação e as despesas informadas até o momento.</p>
+
+            <div class="finance-summary">
+                <div class="finance-card">
+                    <p>Arrecadado</p>
+                    <strong>R$ 7.875,00</strong>
+                </div>
+                <div class="finance-card">
+                    <p>Previsão de arrecadação</p>
+                    <strong>R$ 8.400,00</strong>
+                    <p>Se todas as presenças forem confirmadas</p>
+                </div>
+                <div class="finance-card">
+                    <p>Despesas pagas</p>
+                    <strong>R$ 2.522,50</strong>
+                </div>
+                <div class="finance-card">
+                    <p>Despesas a pagar</p>
+                    <strong>R$ 5.150,00</strong>
+                </div>
+                <div class="finance-card">
+                    <p>Saldo atual</p>
+                    <strong>R$ 5.352,50</strong>
+                    <p>Arrecadado menos despesas pagas</p>
+                </div>
+                <div class="finance-card">
+                    <p>Saldo após despesas pendentes</p>
+                    <strong>R$ 802,50</strong>
+                    <p>Considerando a arrecadação atual</p>
+                </div>
+            </div>
+
+            <div class="finance-details">
+                <div class="menu-info">
+                    <h3>Pagos</h3>
+                    <ul class="finance-list">
+                        <li><span>Chopp <a href="contabilidade/chopp.jpeg" data-comprovante="Comprovante de pagamento do chopp" aria-label="Ver comprovante do chopp">Ver comprovante</a></span><strong>R$ 1.474,50</strong></li>
+                        <li><span>Barman — 1ª parcela <a href="contabilidade/barman.png" data-comprovante="Contrato do barman" aria-label="Ver contrato do barman">Ver contrato</a></span><strong>R$ 700,00</strong></li>
+                        <li><span>Camarão <a href="contabilidade/comidas-camarao.jpeg" data-comprovante="Comprovante de pagamento do camarão" aria-label="Ver comprovante do camarão">Ver comprovante</a></span><strong>R$ 348,00</strong></li>
+                    </ul>
+                </div>
+                <div class="menu-info">
+                    <h3>Contratados, a pagar</h3>
+                    <ul class="finance-list">
+                        <li><span>Montagem de som e painel de LED</span><strong>R$ 150,00</strong></li>
+                        <li><span>Banda</span><strong>R$ 1.400,00</strong></li>
+                        <li><span>Garçom</span><strong>R$ 500,00</strong></li>
+                        <li><span>Barman — 2ª parcela, prevista para 26/11/2026</span><strong>R$ 700,00</strong></li>
+                        <li><span>Descartáveis</span><strong>R$ 300,00</strong></li>
+                        <li><span>Comida</span><strong>R$ 1.500,00</strong></li>
+                    </ul>
+                </div>
+            </div>
+            <p class="finance-note">Os saldos consideram somente as despesas informadas acima; outras despesas ainda poderão ser incluídas.</p>
+        </div>
+    </section>
+
     <section id="fotos">
         <div class="container">
             <h2>Fotos da Galera</h2>
@@ -709,9 +840,9 @@
         </div>
     </footer>
 
-    <dialog class="photo-dialog" id="foto-ampliada" aria-label="Foto ampliada">
+    <dialog class="photo-dialog" id="foto-ampliada" aria-label="Imagem ampliada">
         <img alt="">
-        <button class="photo-dialog-close" type="button" aria-label="Fechar foto ampliada" autofocus>&times;</button>
+        <button class="photo-dialog-close" type="button" aria-label="Fechar imagem ampliada" autofocus>&times;</button>
     </dialog>
 
     <script>
@@ -720,15 +851,19 @@
         const botaoFecharFoto = dialogFoto.querySelector('button');
         let fechandoFoto = false;
 
+        function abrirImagem(src, descricao) {
+            imagemAmpliada.src = src;
+            imagemAmpliada.alt = descricao;
+            dialogFoto.showModal();
+        }
+
         function prepararFoto(foto) {
             foto.setAttribute('role', 'button');
             foto.setAttribute('tabindex', '0');
             foto.setAttribute('aria-label', `Ampliar: ${foto.alt}`);
 
             function ampliarFoto() {
-                imagemAmpliada.src = foto.src;
-                imagemAmpliada.alt = foto.alt;
-                dialogFoto.showModal();
+                abrirImagem(foto.src, foto.alt);
             }
 
             foto.addEventListener('click', ampliarFoto);
@@ -768,6 +903,13 @@
         });
 
         document.querySelectorAll('main img').forEach(prepararFoto);
+        document.querySelectorAll('[data-comprovante]').forEach(link => {
+            link.addEventListener('click', evento => {
+                if (evento.ctrlKey || evento.metaKey || evento.shiftKey || evento.altKey) return;
+                evento.preventDefault();
+                abrirImagem(link.href, link.dataset.comprovante);
+            });
+        });
 
         async function carregarGaleria() {
             const galeria = document.querySelector('#galeria-fotos');
